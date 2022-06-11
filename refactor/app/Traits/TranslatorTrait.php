@@ -4,17 +4,13 @@ namespace DTApi\Traits;
 
 use DTApi\Models\Job;
 use DTApi\Models\User;
-UsersBlacklist
-Carbon
-Translator
+use DTApi\Models\UsersBlacklist;
+use Carbon\Carbon;
+use DTApi\Models\Translator;
 use Illuminate\Http\Request;
 
 trait TranslatorTrait {
 
-    /**
-     * @param Request $request
-     * @return $this|false|string
-     */
      public function getPotentialTranslators(Job $job)
      {
          $job_type = $job->job_type;

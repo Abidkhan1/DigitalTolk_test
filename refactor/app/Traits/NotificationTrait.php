@@ -2,12 +2,12 @@
 
 namespace DTApi\Traits;
 
+use Monolog\Logger;
 use DTApi\Models\Job;
 use DTApi\Models\User;
-TeHelper
-StreamHandler
-Logger
-FirePHPHandler
+use DTApi\Helpers\TeHelper;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
 use Illuminate\Http\Request;
 
 trait NotificationTrait {

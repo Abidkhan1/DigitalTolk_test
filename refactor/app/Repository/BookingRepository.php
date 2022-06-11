@@ -27,27 +27,30 @@ use Illuminate\Support\Facades\Log;
 use Monolog\Handler\FirePHPHandler;
 use Illuminate\Support\Facades\Auth;
 
-// Traits
+// Importing Traits
 use DTApi\Traits\UsersJobsTrait;
-// Traits
-/**
- * Class BookingRepository
- * @package DTApi\Repository
- */
+use DTApi\Traits\JobTrait;
+use DTApi\Traits\StatusTrait;
+use DTApi\Traits\TranslatorTrait;
+use DTApi\Traits\NotificationTrait;
+use DTApi\Traits\ExpireSettingsTrait;
+// Importing Traits
+
 class BookingRepository extends BaseRepository
 {
-
     // using Traits
-     use UsersJobsTrait;
+    use JobTrait;
+    use StatusTrait;
+    use UsersJobsTrait;
+    use TranslatorTrait;
+    use NotificationTrait;
+    use ExpireSettingsTrait;
     // using Traits
 
     protected $model;
     protected $mailer;
     protected $logger;
 
-    /**
-     * @param Job $model
-     */
     function __construct(Job $model, MailerInterface $mailer)
     {
         parent::__construct($model);

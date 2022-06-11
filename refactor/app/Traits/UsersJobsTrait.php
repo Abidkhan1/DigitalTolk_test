@@ -8,10 +8,6 @@ use Illuminate\Http\Request;
 
 trait UsersJobsTrait {
 
-    /**
-     * @param Request $request
-     * @return $this|false|string
-     */
      public function getUsersJobs($user_id)
      {
          $cuser = User::find($user_id);
@@ -42,10 +38,6 @@ trait UsersJobsTrait {
          return ['emergencyJobs' => $emergencyJobs, 'noramlJobs' => $noramlJobs, 'cuser' => $cuser, 'usertype' => $usertype];
      }
 
-     /**
-      * @param $user_id
-      * @return array
-      */
      public function getUsersJobsHistory($user_id, Request $request)
      {
          $page = $request->get('page');

@@ -3,15 +3,14 @@
 namespace DTApi\Traits;
 
 use DTApi\Models\Job;
-TeHelper;
-Carbon;
-AppMailer
-Event
-JobWasCanceled
-UserLanguages
-SessionEnded
-JobWasCreated
-UserMeta
+use Carbon\Carbon;
+use DTApi\Models\UserMeta;
+use DTApi\Helpers\TeHelper;
+use Illuminate\Http\Request;
+use DTApi\Mailers\AppMailer;
+use DTApi\Models\UserLanguages;
+use DTApi\Events\JobWasCreated;
+use DTApi\Events\SessionEnded;
 
 use Illuminate\Http\Request;
 

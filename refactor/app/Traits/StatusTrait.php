@@ -4,7 +4,7 @@ namespace DTApi\Traits;
 
 use DTApi\Models\Job;
 use DTApi\Models\User;
-TeHelper;
+use DTApi\Helpers\TeHelper;
 use Illuminate\Http\Request;
 
 trait StatusTrait {
@@ -50,7 +50,6 @@ trait StatusTrait {
 
   private function changeTimedoutStatus($job, $data, $changedTranslator)
   {
-//        if (in_array($data['status'], ['pending', 'assigned']) && date('Y-m-d H:i:s') <= $job->due) {
       $old_status = $job->status;
       $job->status = $data['status'];
       $user = $job->user()->first();
@@ -73,9 +72,7 @@ trait StatusTrait {
 
           $subject = 'Vi har nu återöppnat er bokning av ' . TeHelper::fetchLanguageFromJobId($job->from_language_id) . 'tolk för bokning #' . $job->id;
           $this->mailer->send($email, $name, $subject, 'emails.job-change-status-to-customer', $dataEmail);
-
           $this->sendNotificationTranslator($job, $job_data, '*');   // send Push all sutiable translators
-
           return true;
       } elseif ($changedTranslator) {
           $job->save();
@@ -88,7 +85,6 @@ trait StatusTrait {
 
   private function changeCompletedStatus($job, $data)
   {
-//        if (in_array($data['status'], ['withdrawnbefore24', 'withdrawafter24', 'timedout'])) {
       $job->status = $data['status'];
       if ($data['status'] == 'timedout') {
           if ($data['admin_comments'] == '') return false;
@@ -96,18 +92,12 @@ trait StatusTrait {
       }
       $job->save();
       return true;
-//        }
       return false;
   }
 
-  /**
-   * @param $job
-   * @param $data
-   * @return bool
-   */
+
   private function changeStartedStatus($job, $data)
   {
-//        if (in_array($data['status'], ['withdrawnbefore24', 'withdrawafter24', 'timedout', 'completed'])) {
       $job->status = $data['status'];
       if ($data['admin_comments'] == '') return false;
       $job->admin_comments = $data['admin_comments'];
@@ -147,23 +137,13 @@ trait StatusTrait {
               'for_text'     => 'lön'
           ];
           $this->mailer->send($email, $name, $subject, 'emails.session-ended', $dataEmail);
-
       }
       $job->save();
       return true;
-//        }
-      return false;
   }
 
-  /**
-   * @param $job
-   * @param $data
-   * @param $changedTranslator
-   * @return bool
-   */
   private function changePendingStatus($job, $data, $changedTranslator)
   {
-//        if (in_array($data['status'], ['withdrawnbefore24', 'withdrawafter24', 'timedout', 'assigned'])) {
       $job->status = $data['status'];
       if ($data['admin_comments'] == '' && $data['status'] == 'timedout') return false;
       $job->admin_comments = $data['admin_comments'];

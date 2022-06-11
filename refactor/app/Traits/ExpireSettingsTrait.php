@@ -2,9 +2,14 @@
 
 namespace DTApi\Traits;
 
+use Carbon\Carbon;
 use DTApi\Models\Job;
 use DTApi\Models\User;
+use DTApi\Models\Language;
+use DTApi\Helpers\TeHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 trait ExpireSettingsTrait {
   public function bookingExpireNoAccepted()
